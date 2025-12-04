@@ -1,0 +1,125 @@
+/* CONTENEDOR GENERAL DEL FORMULARIO */
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;   /* centra horizontalmente dentro del área blanca */
+  align-items: flex-start;
+  background-color: #fff;
+}
+
+.section-registro {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* centra el body dentro de la sección */
+}
+
+.body-registro {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* centra el container-form */
+}
+
+/* AQUÍ SE CONTROLA EL ANCHO Y CENTRADO REAL DEL FORMULARIO */
+.container-form {
+  width: 70%;
+  max-width: 900px;
+  margin: 3rem auto 4rem auto; /* centrado horizontal */
+  display: flex;
+  flex-direction: column;
+}
+
+/* TÍTULO */
+.title-user {
+  font-size: 28px;
+  text-align: left;
+  font-family: Nexa-Bold;
+  letter-spacing: 2px;
+  color: #231F20;
+  text-transform: capitalize;
+  opacity: 1;
+}
+
+/* CAMPOS MATERIAL DENTRO DEL FORMULARIO
+   (sobrescribe el margin-left global del proyecto) */
+.container-form mat-form-field {
+  width: 100% !important;
+  margin-left: 0 !important;
+  height: 48px !important;
+  text-align: left !important;
+  margin-bottom: 12px;
+}
+
+/* MENSAJES DE ERROR */
+.invalid-feedback {
+  width: 100%;
+  margin-top: -10px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #d32f2f;
+  font-family: Nexa-Light;
+}
+
+/* TÍTULO DE DÍAS */
+.title-materias {
+  font-size: 20px;
+  font-family: Nexa-Bold;
+  color: #231F20;
+  margin-bottom: 8px;
+}
+
+/* CHECKBOXES DE DÍAS */
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.checkbox-item {
+  font-family: Nexa-Light;
+}
+
+.d-checkbox-nombre {
+  font-size: 15px;
+  padding-left: 5px;
+  font-family: Nexa-Light;
+}
+
+/* TIMEPICKER */
+.form-field {
+  width: 100% !important;
+}
+
+::ng-deep ngx-material-timepicker {
+  z-index: 2000 !important;
+}
+
+/* BOTONES INFERIORES */
+.section-buttons {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    font-family: Nexa-Bold;
+    border-radius: 6px;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .container-form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

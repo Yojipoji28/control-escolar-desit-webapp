@@ -1,0 +1,151 @@
+<div class="wrapper">
+  <div class="section-registro">
+    <div class="body-registro">
+      <div class="container-form">
+
+        <!-- TÍTULO -->
+        <div class="row mt-3 mb-3">
+          <div class="form-group col-12">
+            <label class="title-user">
+              {{ editar ? 'Editar materia' : 'Registrar nueva materia' }}
+            </label>
+          </div>
+        </div>
+
+        <!-- NRC -->
+        <mat-form-field appearance="outline">
+          <mat-label>NRC</mat-label>
+          <input matInput name="nrc" placeholder="Escribe el NRC" [(ngModel)]="materia.nrc" mask="000000"
+            minlength="5"
+            maxlength="6">
+        </mat-form-field>
+        <div *ngIf="errors.nrc" class="invalid-feedback">
+          {{ errors.nrc }}
+        </div>
+
+        <!-- NOMBRE DE LA MATERIA -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre de la materia</mat-label>
+          <input matInput name="nombre_materia" placeholder="Ejemplo: Sistemas Operativos II"
+            [(ngModel)]="materia.nombre_materia" maxlength="100" pattern="^[A-Za-zÁÉÍÓÚáéíóúÜüÑñ ]+$">
+        </mat-form-field>
+        <div *ngIf="errors.nombre_materia" class="invalid-feedback">
+          {{ errors.nombre_materia }}
+        </div>
+
+        <!-- SECCIÓN -->
+        <mat-form-field appearance="outline">
+          <mat-label>Sección</mat-label>
+          <input matInput name="seccion" placeholder="Número de sección" [(ngModel)]="materia.seccion" mask="000"
+            maxlength="3">
+        </mat-form-field>
+        <div *ngIf="errors.seccion" class="invalid-feedback">
+          {{ errors.seccion }}
+        </div>
+
+        <!-- DÍAS DE LA SEMANA -->
+        <div class="select-materias">
+          <div class="row mt-3 mb-3">
+            <div class="form-group col-12">
+              <label class="title-materias">
+                Selecciona los días de la materia
+              </label>
+            </div>
+          </div>
+
+          <div class="checkbox-group" *ngFor="let dia of diasSemana">
+            <mat-checkbox class="checkbox-item opc-sc" [checked]="isDiaSeleccionado(dia.value)"
+              (change)="toggleDia(dia.value, $event.checked)">
+              <div class="d-checkbox-nombre">{{ dia.label }}</div>
+            </mat-checkbox>
+          </div>
+
+          <div *ngIf="errors.dias" class="invalid-feedback">
+            {{ errors.dias }}
+          </div>
+        </div>
+
+        <!-- HORA DE INICIO -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Hora de inicio</mat-label>
+          <input matInput [ngxTimepicker]="inicioPicker" readonly placeholder="Selecciona la hora de inicio"
+            [(ngModel)]="hora_inicio_12" (ngModelChange)="changeHoraInicio($event)">
+          <ngx-material-timepicker #inicioPicker></ngx-material-timepicker>
+        </mat-form-field>
+        <div *ngIf="errors.hora_inicio" class="invalid-feedback">
+          {{ errors.hora_inicio }}
+        </div>
+
+        <!-- HORA DE FINALIZACIÓN -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Hora de finalización</mat-label>
+          <input matInput [ngxTimepicker]="finalPicker" readonly placeholder="Selecciona la hora de finalización"
+            [(ngModel)]="hora_fin_12" (ngModelChange)="changeHoraFinal($event)">
+          <ngx-material-timepicker #finalPicker></ngx-material-timepicker>
+        </mat-form-field>
+        <div *ngIf="errors.hora_fin" class="invalid-feedback">
+          {{ errors.hora_fin }}
+        </div>
+
+        <!-- SALÓN -->
+        <mat-form-field appearance="outline">
+          <mat-label>Salón</mat-label>
+          <input matInput name="salon" placeholder="Ejemplo: B-203" [(ngModel)]="materia.salon" maxlength="15"
+            pattern="^[A-Za-z0-9ÁÉÍÓÚáéíóúÜüÑñ ]+$">
+        </mat-form-field>
+        <div *ngIf="errors.salon" class="invalid-feedback">
+          {{ errors.salon }}
+        </div>
+
+        <!-- PROGRAMA EDUCATIVO -->
+        <mat-form-field appearance="outline">
+          <mat-label>Programa educativo</mat-label>
+          <mat-select name="programa_educativo" [(ngModel)]="materia.programa_educativo">
+            <mat-option *ngFor="let prog of programasEducativos" [value]="prog">
+              {{ prog }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="errors.programa_educativo" class="invalid-feedback">
+          {{ errors.programa_educativo }}
+        </div>
+
+        <!-- PROFESOR ASIGNADO -->
+        <mat-form-field appearance="outline">
+          <mat-label>Profesor asignado</mat-label>
+          <mat-select name="profesor" [(ngModel)]="materia.profesor">
+            <mat-option *ngFor="let m of lista_maestros" [value]="m.id">
+              {{ m.nombre_completo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="errors.profesor" class="invalid-feedback">
+          {{ errors.profesor }}
+        </div>
+
+        <!-- CRÉDITOS -->
+        <mat-form-field appearance="outline">
+          <mat-label>Créditos</mat-label>
+          <input matInput name="creditos" placeholder="Créditos de la materia" [(ngModel)]="materia.creditos" mask="00"
+            minlength="1"
+            maxlength="2">
+        </mat-form-field>
+        <div *ngIf="errors.creditos" class="invalid-feedback">
+          {{ errors.creditos }}
+        </div>
+
+        <!-- BOTONES -->
+        <div class="section-buttons">
+          <button mat-raised-button color="primary" (click)="guardar()">
+            {{ editar ? 'Actualizar materia' : 'Registrar materia' }}
+          </button>
+
+          <button mat-stroked-button color="warn" (click)="regresar()">
+            Cancelar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
